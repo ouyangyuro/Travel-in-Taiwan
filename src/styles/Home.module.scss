@@ -1,3 +1,29 @@
-.status{
-  color: blue;
+.light_primary {
+  @apply text-2xl;
+}
+.light_light_primary {
+  color: $light-primary;
+  @apply text-4xl border border-gray-300 rounded; 
+  font-size: 50px;
+}
+.light_pale_primary {
+  color: $pale-primary;
+}
+.light_text_primary {
+  color: $text-primary;
+}
+.light_text_second {
+  color: $text-second;
+}
+.light_text_tertiary {
+  color: $text-tertiary;
+}
+.light_background_white {
+  color: $background-white;
+}
+.light_background_gray {
+  color: $background-gray;
+}
+.light_line {
+  color: $line;
 }
