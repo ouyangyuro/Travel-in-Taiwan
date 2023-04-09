@@ -26,7 +26,8 @@ const nextConfig = {
   sassOptions: {
     includePaths: ['./src'],
     prependData: `
-    @import '/src/styles/theme.scss';
+    @import '/src/assets/styles/theme.scss';
+    @import '/src/assets/styles/breakpoint.scss';
   `,
   },
 

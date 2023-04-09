@@ -1,3 +1,6 @@
 {
-  "title": "common"
+  "header": {
+    "english": "EN",
+    "chinese": "中文"
+  }
 }

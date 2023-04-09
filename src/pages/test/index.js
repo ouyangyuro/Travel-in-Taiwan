@@ -1,7 +1,7 @@
-import React from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
-import DefaultLayout from 'src/layout/defaultLayout';
+
+import DefaultLayout from '@layout/defaultLayout';
 
 function Test() {
   /** ---------------------------------------------------------------------------------------------
