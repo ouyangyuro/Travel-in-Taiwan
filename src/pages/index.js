@@ -1,19 +1,58 @@
-import DefaultLayout from 'src/layout/defaultLayout';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
-import styles from '@/styles/Home.module.scss';
+import DefaultLayout from '@layout/defaultLayout';
+
+import styles from './index.module.scss';
 
 export default function Home() {
+  /** ---------------------------------------------------------------------------------------------
+   * Basic
+   */
+  const { t } = useTranslation('home');
+
+  // ---------------------------------------------------------------------------------------------
+
   return (
     <>
-      <p className={styles.light_primary}>123</p>
-      <p className={styles.light_light_primary}>123</p>
-      <p className={styles.light_pale_primary}>123</p>
-      <p className={styles.light_text_primary}>123</p>
-      <p className={styles.light_text_second}>123</p>
-      <p className={styles.light_text_tertiary}>123</p>
-      <p className={styles.light_background_white}>123</p>
-      <p className={styles.light_background_gray}>123</p>
-      <p className={styles.light_line}>123</p>
+      <div>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')} {t('title')} {t('title')} {t('title')} {t('title')}123456 {t('title')} {t('title')} {t('title')} {t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+        <p>{t('title')}</p>
+      </div>
     </>
   );
 }
@@ -21,3 +60,12 @@ export default function Home() {
 Home.getLayout = function getLayout(page) {
   return <DefaultLayout>{page}</DefaultLayout>;
 };
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common', 'home'])),
+      // Will be passed to the page component as props
+    },
+  };
+}

@@ -1,0 +1,15 @@
+// .light_primary {
+//   @apply text-2xl;
+// }
+
+#app {
+  > .top {
+    @include ipad {
+      display: none;
+    }
+  }
+
+  > main {
+    background-color: $background_gray;
+  }
+}
