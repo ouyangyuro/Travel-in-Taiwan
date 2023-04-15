@@ -75,13 +75,13 @@ export default function Header() {
 
   return (
     <>
-      <div className={styles.container}>
+      <header className={styles.header}>
         <div
           className={`${styles.box} ${cx(
             isOpen && !isMobile && styles.boxPadding
           )}`}
         >
-          <div className={styles.iconBox}>
+          <div className={styles.hambuageBox}>
             <div className={styles.icon} onClick={handleToggle}>
               <AdjustmentsHorizontalIcon className="h-6 w-6 text-primary" />
             </div>
@@ -103,7 +103,7 @@ export default function Header() {
             </div>
           </div>
 
-          <div className={styles.langBox}>
+          <nav className={styles.navbarBox}>
             <div className={styles.lang}>
               <Link locale={nextLocale} href={{ pathname, query }}>
                 {router.locale === 'en'
@@ -111,9 +111,9 @@ export default function Header() {
                   : t('header.english')}
               </Link>
             </div>
-          </div>
+          </nav>
         </div>
-      </div>
+      </header>
     </>
   );
 }
