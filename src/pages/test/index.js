@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 
@@ -9,9 +10,21 @@ function Test() {
    */
   const { t } = useTranslation('test');
 
+  useEffect(() => {
+    console.log('hi');
+
+    return () => {
+      console.clear();
+    };
+  }, []);
+
   // ---------------------------------------------------------------------------------------------
 
-  return <>{t('title')}</>;
+  return (
+    <>
+      <div>{t('title')}</div>
+    </>
+  );
 }
 
 Test.getLayout = function getLayout(page) {
