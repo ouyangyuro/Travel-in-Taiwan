@@ -1,7 +1,12 @@
 import jsSHA from 'jssha';
 import { TDXKey,TDXId } from 'src/config/env';
 
-
+/** ---------------------------------------------------------------------------------------------------------------------
+ * Utils: 取得 API 驗證
+ * @param  {...any} args
+ *
+ * @return {object}
+ */
 export function getAuthorizationHeader() {
   let GMTString = new Date().toGMTString();
   let ShaObj = new jsSHA('SHA-1', 'TEXT');

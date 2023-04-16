@@ -6,7 +6,7 @@ import siteMetaData from 'src/config/siteMetaData';
 
 /**
  * -------------------------------------------------------------------------------------------
- * 名稱: SEO 處理
+ * Utils: SEO 處理
  * 說明: 在page引入該function，能自動完成基本meta data基本設定。
  * @param  {string}         [title]         網頁標題
  * @param  {string}         [description]   網頁說明文字
@@ -16,6 +16,8 @@ import siteMetaData from 'src/config/siteMetaData';
  *                                           'aaa,bbb,ccc,ddd'
  *                                           ['abc','aaa','bbb']
  * @param  {string}         [image]         封面圖片位置
+ * 
+ * @return {html}
  */
 const SEO = ({
   title = undefined,
