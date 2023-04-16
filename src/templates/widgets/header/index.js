@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
+import Link from 'next/link';
+
+import { setIsOpen, setIsTransform, setIsMobile } from '@redux/hambuage';
 
 import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
 
@@ -16,20 +18,20 @@ export default function Header() {
    * Basic
    */
   const { t } = useTranslation('common');
+  const dispatch = useDispatch();
   const router = useRouter();
   const { pathname, query } = router;
   const nextLocale = router.locale === 'en' ? 'zhHant' : 'en';
 
   /** ---------------------------------------------------------------------------------------------
    * State
-   * @type {undefined|boolean}         isLogin             是否登入
-   * @type {undefined|object}          object              是否登入
-   * @type {boolean}                   toggle              漢堡清單開關狀態
-   * @type {boolean}                   redirectPath        要進行轉址的路徑
+   * @type {boolean}                isOpen          是否打開漢堡選單
+   * @type {boolean}                isTransform     轉場效果開關
+   * @type {undefined|boolean}      isMobile        是不是手機設備
    */
-  const [isOpen, setIsOpen] = useState(false);
-  const [isTransform, setIsTransform] = useState(false);
-  const [isMobile, setIsMobile] = useState(undefined);
+  const { isOpen, isTransform, isMobile } = useSelector(
+    (state) => state.hambuage
+  );
 
   /** ---------------------------------------------------------------------------------------------
    * onClick: 漢堡選單開關 + 轉場效果
@@ -42,9 +44,9 @@ export default function Header() {
     if (isOpen === true) {
       // --------------------------------------------------------
       // Close 漢堡選單
-      setIsTransform(!isTransform);
+      dispatch(setIsTransform(!isTransform));
       setTimeout(() => {
-        setIsOpen(!isOpen);
+        dispatch(setIsOpen(!isOpen));
         document.body.style = {};
       }, 400);
     } else {
@@ -52,20 +54,20 @@ export default function Header() {
       // Open 漢堡選單
       if (isMobileDevice()) {
         // 手機
-        setIsMobile(true);
-        setIsOpen(!isOpen);
+        dispatch(setIsMobile(true));
+        dispatch(setIsOpen(!isOpen));
         document.body.style.overflow = 'hidden';
         setTimeout(() => {
-          setIsTransform(!isTransform);
+          dispatch(setIsTransform(!isTransform));
         }, 400);
       } else {
         // 電腦
-        setIsMobile(false);
-        setIsOpen(!isOpen);
+        dispatch(setIsMobile(false));
+        dispatch(setIsOpen(!isOpen));
         document.body.style.overflow = 'hidden';
         document.body.style.paddingRight = '15px';
         setTimeout(() => {
-          setIsTransform(!isTransform);
+          dispatch(setIsTransform(!isTransform));
         }, 400);
       }
     }
@@ -85,14 +87,7 @@ export default function Header() {
             <div className={styles.icon} onClick={handleToggle}>
               <AdjustmentsHorizontalIcon className="h-6 w-6 text-primary" />
             </div>
-
-            {isOpen && (
-              <Hambuage
-                setIsOpen={setIsOpen}
-                setIsTransform={setIsTransform}
-                isTransform={isTransform}
-              />
-            )}
+            {isOpen && <Hambuage />}
           </div>
 
           <div className={styles.logoBox}>
