@@ -47,6 +47,6 @@
   "508": "508 Loop Detected",
   "510": "510 Not Extended",
   "511": "511 Network Authentication Required",
-  "CA_9781": "The slug cannot contain : / ? #  [ ] @ ! $ & ' ( ) * + , ; = \\",
-  "CA_9886": "Email has been registered"
+  "error": "Network or Server is error.",
+  "cancel": "API is canceled."
 }
