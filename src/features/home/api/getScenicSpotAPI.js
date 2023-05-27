@@ -12,6 +12,7 @@ import { getAuthorizationHeader } from '@utils/getAuthorizationHeader';
  * @param  {undefined|object}   [signal]      to control cancel requests
  * @param  {number}             top           回傳前幾筆
  * @param  {undefined|number}   skip          跳過前幾筆
+ * @param  {string}             filter        過濾回傳的資料 (default: 不回傳沒照片的資料)
  *
  * @return {object}
  */
@@ -19,6 +20,7 @@ const getScenicSpotAPI = async ({
   signal = undefined,
   top = 10,
   skip = undefined,
+  filter = 'Picture/PictureUrl1 ne null',
 }) => {
   /** ---------------------------------------------------------------------------------------------------------------------
    * return 狀態
@@ -41,6 +43,7 @@ const getScenicSpotAPI = async ({
     $top: top,
     $skip: skip,
     $format: 'JSON',
+    $filter: filter,
   };
 
   await axios

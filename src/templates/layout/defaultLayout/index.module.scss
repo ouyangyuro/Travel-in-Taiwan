@@ -14,7 +14,10 @@
 
       > .left {
         @include ipad {
-          flex: 1 1 30%;
+          flex: 1 1 280px;
+        }
+        @include desktop{
+          flex: 1 1 350px;
         }
       }
 
@@ -28,6 +31,11 @@
 
         @include ipad {
           padding-top: 0;
+          width: calc(100% - 280px);
+        }
+
+        @include desktop{
+          width: calc(100% - 350px);
         }
       }
     }
