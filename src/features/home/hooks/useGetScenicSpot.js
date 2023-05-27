@@ -51,7 +51,7 @@ const useGetScenicSpot = () => {
     return () => {
       isMountedRef.current = false;
       apiControllerRef.current?.abort();
-      // console.clear(); //FIXME:
+      console.clear(); //FIXME:
     };
   }, []);
 

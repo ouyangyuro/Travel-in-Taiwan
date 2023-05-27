@@ -11,8 +11,26 @@ function LeftMenu() {
 
   return (
     <>
-      <div className="w-full h-full">
-        <div className={styles.box}>LeftMenu</div>
+      <div className={styles.container}>
+        <div className={styles.box}>
+          <h1>LeftMenu</h1>
+
+          <p>123456</p>
+          <p>123456</p>
+          <p>123456</p>
+          <p>123456</p>
+          <p>123456</p>
+          <p>123456</p>
+          <p>123456</p>
+          <p>123456</p>
+          <p>123456</p>
+          <p>123456</p>
+          <p>123456</p>
+          <p>123456</p>
+          <p>123456</p>
+          <p>123456</p>
+          <p>123456</p>
+        </div>
       </div>
     </>
   );

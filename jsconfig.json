@@ -2,11 +2,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@layout/*": ["/src/templates/layout/*"],
-      "@image/*": ["/src/assets/images/*"],
-      "@utils/*": ["/src/utils/*"],
-      "@components/*": ["/src/components/*"],
-      "@redux/*": ["/src/redux/slice/*"]
+      "@layout/*": ["src/templates/layout/*"],
+      "@image/*": ["src/assets/images/*"],
+      "@utils/*": ["src/utils/*"],
+      "@components/*": ["src/components/*"],
+      "@redux/*": ["src/redux/slice/*"]
     }
   }
 }
