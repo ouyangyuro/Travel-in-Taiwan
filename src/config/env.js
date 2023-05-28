@@ -14,7 +14,7 @@ export const WEB_HOSTNAME_URL = process.env.NEXT_PUBLIC_SITE_HOSTNAME;
 
 /**
  * --------------------------------------------------------------------------------------------------------------
- * Google
+ * Google // TODO: not apply yet, so not use
  */
 export const GOOGLE_SITE_VERIFICATION =
   process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
@@ -22,6 +22,6 @@ export const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
 
 /**
  * --------------------------------------------------------------------------------------------------------------
- * FB
+ * FB // TODO: not apply yet, so not use
  */
 export const FB_APP_ID = process.env.NEXT_PUBLIC_FB_APP_ID;
