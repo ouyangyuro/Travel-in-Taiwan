@@ -2,7 +2,7 @@ import {
   GOOGLE_SITE_VERIFICATION,
   GOOGLE_CLIENT_ID,
   FB_APP_ID,
-} from 'src/config/env';
+} from 'src/config/config';
 
 /** ---------------------------------------------------------------------------------------------------------------------
  * Config: head's meta
