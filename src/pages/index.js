@@ -8,7 +8,7 @@ import TopBanner from '@components/topBanner';
 import SpotSwiperCards from '@components/spotSwiperCards';
 import SwiperCardsLoading from '@components/swiperCardsLoading';
 
-import SearchBtn from 'src/features/home/elements/searchBtn';
+import SearchBtn from 'src/features/home/components/searchBtn';
 import useGetScenicSpot from 'src/features/home/hooks/useGetScenicSpot';
 
 import styles from './index.module.scss';
