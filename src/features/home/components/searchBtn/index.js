@@ -25,7 +25,9 @@ export default function SearchBtn() {
   /** ---------------------------------------------------------------------------------------------
    * onClick: open 漢堡選單 + 轉場效果
    */
-  const handleToggle = () => {
+  const handleToggle = (e) => {
+    e.preventDefault();
+
     function isMobileDevice() {
       return 'ontouchstart' in window || navigator.maxTouchPoints;
     }
@@ -56,7 +58,7 @@ export default function SearchBtn() {
     <>
       <div className={`${styles.searchBtn} pt-4`}>
         <button className={`${styles.btn} px-3`} onClick={handleToggle}>
-        {t('destination')}
+          {t('destination')}
           <ArrowDownCircleIcon />
         </button>
       </div>

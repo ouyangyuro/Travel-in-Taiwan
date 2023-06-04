@@ -21,10 +21,20 @@ const nextConfig = {
   },
 
   /* ---------------------------------------------------------------------------------------------
-   * 允許使用picsum網站的假圖
+   * 允許使用picsum網站的假圖 & 交通部的圖片
    */
   images: {
-    domains: ['picsum.photos'],
+    domains: [
+      'picsum.photos',
+      'www.eastcoast-nsa.gov.tw',
+      'www.penghu-nsa.gov.tw',
+    ],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'penghutravel.com',
+      },
+    ],
   },
 
   /* ---------------------------------------------------------------------------------------------

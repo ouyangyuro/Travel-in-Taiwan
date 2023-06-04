@@ -1,5 +1,6 @@
-import Header from '/src/templates/widgets/header';
-import LeftMenu from '/src/templates/widgets/leftMenu';
+import Header from 'src/templates/widgets/header';
+import Footer from 'src/templates/widgets/footer';
+import LeftMenu from 'src/templates/widgets/leftMenu';
 import styles from './index.module.scss';
 
 export default function DefaultLayout({ children }) {
@@ -12,7 +13,10 @@ export default function DefaultLayout({ children }) {
             <div className={styles.left}>
               <LeftMenu />
             </div>
-            <main>{children}</main>
+            <main>
+              {children}
+              <Footer />
+            </main>
           </div>
         </div>
       </div>

@@ -3,7 +3,9 @@ import { useState, useEffect, useRef } from 'react';
 import getScenicSpotAPI from 'src/api/getScenicSpotAPI';
 
 /** -------------------------------------------------------------------------------------------------------------------
- * 取得所有觀光景點資料 API
+ * 取得附近資料 API
+ * @param  {string}    queryType     query ('scenicSpot', 'restaurant', 'hotel', 'activity')
+ * @param  {object}    position      所在地
  *
  * @return {undefined|string}    status       API 狀態
  *                                            - undefined: 初始
@@ -15,7 +17,7 @@ import getScenicSpotAPI from 'src/api/getScenicSpotAPI';
  * @return {undefined|object}    pagination   存 api 回傳的分頁資料
  * @return {undefined|string}    error        error message
  */
-const useGetScenicSpot = () => {
+const useGetNearybySpot = ({ queryType, position }) => {
   /** ---------------------------------------------------------------------------------------------
    * State
    *
@@ -57,11 +59,11 @@ const useGetScenicSpot = () => {
 
   /** ---------------------------------------------------------------------------------------------
    * Hook
-   * 名稱: 取得所有觀光景點資料
+   * 名稱: 取得附近資料
    */
   useEffect(() => {
-    const handleScenicSpot = async () => {
-      console.log(`~~~~取得所有觀光景點資料~~~~`); //FIXME:
+    const handleSpot = async () => {
+      console.log(`~~~~取得附近觀光${queryType}資料~~~~`); //FIXME:
 
       // loading
       setStatus('loading');
@@ -72,16 +74,43 @@ const useGetScenicSpot = () => {
       // 創建API請求
       apiControllerRef.current = new AbortController();
 
-      // call API 取得所有觀光景點資料
-      const responseData = await getScenicSpotAPI({
-        signal: apiControllerRef.current.signal,
-        top: 10,
-      });
+      let responseData;
+
+      switch (queryType) {
+        // --------------------------------------------------------
+        // call API 取得附近觀光景點資料
+        case 'scenicSpot':
+          responseData = await getScenicSpotAPI({
+            signal: apiControllerRef.current.signal,
+            top: 10,
+            spatialFilter: `nearby(${position.PositionLat},${position.PositionLon},50000)`,
+            select: 'ScenicSpotID,ScenicSpotName,Picture,Address,City,OpenTime',
+          });
+          break;
+
+        // --------------------------------------------------------
+        // call API 取得附近觀光餐飲資料
+        case 'restaurant':
+          break;
+
+        // --------------------------------------------------------
+        // call API 取得附近觀光旅宿資料
+        case 'hotel':
+          break;
+
+        // --------------------------------------------------------
+        // call API 取得附近觀光活動資料
+        case 'activity':
+          break;
+
+        default:
+          break;
+      }
 
       // 確保在此頁執行
       if (isMountedRef.current) {
         if (responseData?.status === 'success') {
-          // handle success (取得觀光景點資料)
+          // handle success (取得附近資料)
           setData(responseData?.data);
           setPagination(responseData?.pagination);
           setStatus('success');
@@ -96,8 +125,8 @@ const useGetScenicSpot = () => {
       }
     };
 
-    handleScenicSpot();
-  }, []);
+    handleSpot();
+  }, [queryType, position]);
 
   // ---------------------------------------------------------------------------------------------
 
@@ -109,4 +138,4 @@ const useGetScenicSpot = () => {
   };
 };
 
-export default useGetScenicSpot;
+export default useGetNearybySpot;

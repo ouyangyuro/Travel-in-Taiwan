@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 import styles from './index.module.scss';
 
-function LeftMenu() {
+export default function LeftMenu() {
   /** ---------------------------------------------------------------------------------------------
    * Basic
    */
@@ -35,5 +35,3 @@ function LeftMenu() {
     </>
   );
 }
-
-export default LeftMenu;
