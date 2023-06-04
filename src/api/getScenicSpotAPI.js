@@ -1,26 +1,30 @@
 import { i18n } from 'next-i18next';
 import axios from 'axios';
 
-import { API_HOSTNAME_URL } from 'src/config/env';
+import { API_HOSTNAME_URL } from 'src/config/config';
 import { getAuthorizationHeader } from '@utils/getAuthorizationHeader';
 
 /** ---------------------------------------------------------------------------------------------------------------------
- * 名稱: 取得所有觀光景點資料
+ * 名稱: 取得'所有'或'特定'觀光景點資料
  * 路由: /v2/Tourism/ScenicSpot
  * 類型: Client to Server
  *
- * @param  {undefined|object}   [signal]      to control cancel requests
- * @param  {number}             top           回傳前幾筆
- * @param  {undefined|number}   skip          跳過前幾筆
- * @param  {string}             filter        過濾回傳的資料 (default: 不回傳沒照片的資料)
+ * @param  {undefined|object}   [signal]        to control cancel requests
+ * @param  {undefined|number}   top             回傳前幾筆
+ * @param  {undefined|number}   skip            跳過前幾筆
+ * @param  {string}             filter          過濾回傳的資料 (default: 不回傳沒照片的資料)
+ * @param  {undefined|string}   spatialFilter   空間過濾(找特定經緯度附近), nearby(Lat,Lon,KM)
+ * @param  {undefined|string}   select          只回傳資料的某些欄位
  *
  * @return {object}
  */
 const getScenicSpotAPI = async ({
   signal = undefined,
-  top = 10,
+  top = undefined,
   skip = undefined,
   filter = 'Picture/PictureUrl1 ne null',
+  spatialFilter = undefined,
+  select = undefined,
 }) => {
   /** ---------------------------------------------------------------------------------------------------------------------
    * return 狀態
@@ -44,6 +48,8 @@ const getScenicSpotAPI = async ({
     $skip: skip,
     $format: 'JSON',
     $filter: filter,
+    $spatialFilter: spatialFilter,
+    $select: select,
   };
 
   await axios
@@ -56,7 +62,7 @@ const getScenicSpotAPI = async ({
       },
     })
     .then(function (response) {
-      // console.log('取得所有觀光景點資料:', response); //FIXME:
+      // console.log('取得觀光景點資料:', response); //FIXME:
       if (response.status === 200) {
         // handle success
         returnData = {

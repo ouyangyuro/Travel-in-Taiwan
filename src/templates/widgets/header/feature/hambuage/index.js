@@ -28,7 +28,9 @@ export default function Hambuage() {
   /** ---------------------------------------------------------------------------------------------
    * onClick: Close 漢堡選單 + 轉場效果
    */
-  const handleClose = () => {
+  const handleClose = (e) => {
+    e.preventDefault();
+
     dispatch(setIsTransform(false));
     setTimeout(() => {
       dispatch(setIsOpen(false));

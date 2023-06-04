@@ -1,5 +1,5 @@
 import jsSHA from 'jssha';
-import { TDXKey,TDXId } from 'src/config/env';
+import { TDXKey,TDXId } from 'src/config/config';
 
 /** ---------------------------------------------------------------------------------------------------------------------
  * Utils: 取得 API 驗證

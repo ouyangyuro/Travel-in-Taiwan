@@ -36,7 +36,9 @@ export default function Header() {
   /** ---------------------------------------------------------------------------------------------
    * onClick: 漢堡選單開關 + 轉場效果
    */
-  const handleToggle = () => {
+  const handleToggle = (e) => {
+    e.preventDefault();
+
     function isMobileDevice() {
       return 'ontouchstart' in window || navigator.maxTouchPoints;
     }

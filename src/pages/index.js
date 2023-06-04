@@ -8,7 +8,7 @@ import TopBanner from '@components/topBanner';
 import SpotSwiperCards from '@components/spotSwiperCards';
 import SwiperCardsLoading from '@components/swiperCardsLoading';
 
-import SearchBtn from 'src/features/home/elements/searchBtn';
+import SearchBtn from 'src/features/home/components/searchBtn';
 import useGetScenicSpot from 'src/features/home/hooks/useGetScenicSpot';
 
 import styles from './index.module.scss';
@@ -32,8 +32,12 @@ export default function Home() {
    * @type {undefined|array}     data         觀光景點資料
    * @type {undefined|string}    error        error message
    */
-  const { status, data, error } = useGetScenicSpot();
-  // console.log(status, data, error); //FIXME:
+  const {
+    status: scenicSpotStatus,
+    data: scenicSpotData,
+    error: scenicSpotError,
+  } = useGetScenicSpot();
+  // console.log(scenicSpotStatus, scenicSpotData, scenicSpotError); //FIXME:
 
   // ---------------------------------------------------------------------------------------------
 
@@ -44,14 +48,14 @@ export default function Home() {
         <div className={`${styles.box} w-full h-full px-4 pt-4 pb-8`}>
           <TopBanner title={t('banner.title')} subject={t('banner.subject')} />
           <SearchBtn />
-          {status === 'success' && (
+          {scenicSpotStatus === 'success' && (
             <div className="mt-4 mb-10">
-              <SpotSwiperCards lists={data} />
+              <SpotSwiperCards type={'scenicSpot'} lists={scenicSpotData} />
             </div>
           )}
-          {(status === undefined ||
-            status === 'loading' ||
-            status === 'cancel') && (
+          {(scenicSpotStatus === undefined ||
+            scenicSpotStatus === 'loading' ||
+            scenicSpotStatus === 'cancel') && (
             <div className="mt-4 mb-10">
               <SwiperCardsLoading />
             </div>
@@ -61,17 +65,6 @@ export default function Home() {
             123456 123456 123456 123456 123456 123456 123456 123456 123456
             123456 123456 123456 123456 123456 123456 123456 123456 123456
           </p>
-          <p>123456</p>
-          <p>123456</p>
-          <p>123456</p>
-          <p>123456</p>
-          <p>123456</p>
-          <p>123456</p>
-          <p>123456</p>
-          <p>123456</p>
-          <p>123456</p>
-          <p>123456</p>
-          <p>123456</p>
           <p>123456</p>
           <p>123456</p>
           <p>123456</p>

@@ -9,12 +9,13 @@ import styles from './index.module.scss';
 
 /** ---------------------------------------------------------------------------------------------------------------------
  * Components: Spot Swiper Cards
- * @param  {array}    lists    cards 列表
+ * @param  {string}    type     類型 ('scenicSpot', 'restaurant, 'hotel', 'activity')
+ * @param  {array}     lists    cards 列表
  *
  * @return {html}
  */
 
-function SpotSwiperCards({ lists }) {
+function SpotSwiperCards({ type, lists }) {
   // ---------------------------------------------------------------------------------------------
 
   return (
@@ -32,9 +33,9 @@ function SpotSwiperCards({ lists }) {
                 className={styles.swiperSlide}
               >
                 <Link
-                  href={`/detail/spot/?did=${item.ScenicSpotID}`}
+                  href={`/detail/${type}/?did=${item.ScenicSpotID}`}
                   title={item.ScenicSpotName}
-                  className={`${styles.perCard} shadow`}
+                  className={`${styles.perCard} shadow transition duration-150 ease-out hover:scale-95`}
                 >
                   <div
                     className={styles.img}

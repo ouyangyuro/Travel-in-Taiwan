@@ -1,8 +1,19 @@
+import Header from 'src/templates/widgets/header';
+import Footer from 'src/templates/widgets/footer';
+import styles from './index.module.scss';
+
 export default function EmptyLayout({ children }) {
   return (
     <>
-      <h1>EmptyLayout</h1>
-      <main>{children}</main>
+      <div id={styles.app}>
+        <div className={styles.container}>
+          <Header />
+          <main>
+            {children}
+            <Footer />
+          </main>
+        </div>
+      </div>
     </>
   );
 }
