@@ -22,7 +22,7 @@ function Test() {
 
   return (
     <>
-      <div>{t('test:title')}{t('detail:scenic_spot.more_spot')}</div>
+      <div>{t('test:title')} {t('detail:scenic_spot.more_spot')}</div>
     </>
   );
 }
@@ -41,7 +41,7 @@ Test.getLayout = function getLayout(page) {
 // }
 
 export async function getServerSideProps({ locale }) {
-  const returnData = {
+  return {
     props: {
       ...(await serverSideTranslations(locale, [
         'api_mapping',
@@ -53,7 +53,7 @@ export async function getServerSideProps({ locale }) {
     },
   };
 
-  return returnData;
+  // return returnData;
 }
 
 export default Test;
