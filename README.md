@@ -27,7 +27,7 @@ Most of the code lives in the src folder and looks like this:
 ```sh
 src
 |
-+-- api         # eall the global API
++-- api         # all the global API
 |
 +-- assets      # assets folder can contain all the static files such as images, global styles, etc.
 |
