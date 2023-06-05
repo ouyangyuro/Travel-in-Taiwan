@@ -8,7 +8,7 @@ function Test() {
   /** ---------------------------------------------------------------------------------------------
    * Basic
    */
-  const { t } = useTranslation('test');
+  const { t } = useTranslation(['detail','test']);
 
   useEffect(() => {
     console.log('hi');
@@ -22,7 +22,7 @@ function Test() {
 
   return (
     <>
-      <div>{t('title')}{t('scenic_spot.more_spot')}</div>
+      <div>{t('test:title')}{t('detail:scenic_spot.more_spot')}</div>
     </>
   );
 }
@@ -46,6 +46,7 @@ export async function getServerSideProps({ locale }) {
       ...(await serverSideTranslations(locale, [
         'api_mapping',
         'common',
+        'test',
         'detail',
       ])),
       // Will be passed to the page component as props
