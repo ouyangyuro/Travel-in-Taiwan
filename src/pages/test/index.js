@@ -31,13 +31,28 @@ Test.getLayout = function getLayout(page) {
   return <DefaultLayout>{page}</DefaultLayout>;
 };
 
-export async function getStaticProps({ locale }) {
-  return {
+// export async function getStaticProps({ locale }) {
+//   return {
+//     props: {
+//       ...(await serverSideTranslations(locale, ['common', 'test'])),
+//       // Will be passed to the page component as props
+//     },
+//   };
+// }
+
+export async function getServerSideProps({ locale }) {
+  const returnData = {
     props: {
-      ...(await serverSideTranslations(locale, ['common', 'test'])),
+      ...(await serverSideTranslations(locale, [
+        'api_mapping',
+        'common',
+        'test',
+      ])),
       // Will be passed to the page component as props
     },
   };
+
+  return returnData;
 }
 
 export default Test;
