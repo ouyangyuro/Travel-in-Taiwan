@@ -1,6 +1,8 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Image from 'next/image';
 
+import moment from 'moment-timezone';
+
 import SEO from '@utils/seo';
 import EmptyLayout from '@layout/emptyLayout';
 
@@ -11,6 +13,7 @@ import TransportInfo from 'src/features/detail/components/transportInfo';
 import NearbySpot from 'src/features/detail/components/nearbySpot';
 
 import getScenicSpotAPI from 'src/api/getScenicSpotAPI';
+import getActivityAPI from 'src/api/getActivityAPI';
 
 import styles from './index.module.scss';
 
@@ -19,6 +22,8 @@ export default function Detail({ data }) {
    * SSR State
    * @type {string}     QueryType             query ('scenicSpot', 'restaurant', 'hotel', 'activity')
    * @type {string}     Address               地址
+   * @type {string}     City                  城市
+   * @type {string}     Location              位置
    * @type {string}     Description           簡介
    * @type {string}     DescriptionDetail     詳細介紹
    * @type {string}     OpenTime              開放時間
@@ -38,6 +43,8 @@ export default function Detail({ data }) {
   const {
     QueryType,
     Address,
+    City,
+    Location,
     Description,
     DescriptionDetail,
     OpenTime,
@@ -77,7 +84,10 @@ export default function Detail({ data }) {
             blurDataURL={'/images/logo-loading.png'}
           />
           <BasicInfo address={Address} openTime={OpenTime} phone={Phone} />
-          <SpotIntroduce descriptionDetail={DescriptionDetail} />
+          <SpotIntroduce
+            queryType={QueryType}
+            descriptionDetail={DescriptionDetail ?? Description}
+          />
           <TransportInfo travelInfo={TravelInfo} position={Position} />
           <NearbySpot
             queryType={QueryType}
@@ -100,6 +110,8 @@ export async function getServerSideProps({ params, query, locale }) {
 
   let detailData = {
     Address: undefined,
+    City: undefined,
+    Location: undefined,
     Description: undefined,
     DescriptionDetail: undefined,
     OpenTime: undefined,
@@ -117,11 +129,13 @@ export async function getServerSideProps({ params, query, locale }) {
     ZipCode: undefined,
   };
 
+  let responseData;
+
   switch (type) {
     // --------------------------------------------------------
     // scenicSpot: call API 取得特定觀光景點資料
     case 'scenicSpot':
-      const responseData = await getScenicSpotAPI({
+      responseData = await getScenicSpotAPI({
         filter: `ScenicSpotID eq '${did}'`,
       });
 
@@ -129,22 +143,22 @@ export async function getServerSideProps({ params, query, locale }) {
         // handle success (取得觀光景點資料)
         detailData = {
           QueryType: type,
-          Address: responseData?.data[0]?.Address,
-          Description: responseData?.data[0]?.Description,
-          DescriptionDetail: responseData?.data[0]?.DescriptionDetail,
-          OpenTime: responseData?.data[0]?.OpenTime,
-          ParkingPosition: responseData?.data[0]?.ParkingPosition,
-          Phone: responseData?.data[0]?.Phone,
-          Picture: responseData?.data[0]?.Picture,
-          Position: responseData?.data[0]?.Position,
+          Address: responseData?.data[0]?.Address ?? null,
+          Description: responseData?.data[0]?.Description ?? null,
+          DescriptionDetail: responseData?.data[0]?.DescriptionDetail ?? null,
+          OpenTime: responseData?.data[0]?.OpenTime ?? null,
+          ParkingPosition: responseData?.data[0]?.ParkingPosition ?? null,
+          Phone: responseData?.data[0]?.Phone ?? null,
+          Picture: responseData?.data[0]?.Picture ?? null,
+          Position: responseData?.data[0]?.Position ?? null,
           Remarks: responseData?.data[0]?.Remarks ?? null,
-          SpotID: responseData?.data[0]?.ScenicSpotID,
-          SpotName: responseData?.data[0]?.ScenicSpotName,
-          SrcUpdateTime: responseData?.data[0]?.SrcUpdateTime,
+          SpotID: responseData?.data[0]?.ScenicSpotID ?? null,
+          SpotName: responseData?.data[0]?.ScenicSpotName ?? null,
+          SrcUpdateTime: responseData?.data[0]?.SrcUpdateTime ?? null,
           TicketInfo: responseData?.data[0]?.TicketInfo ?? null,
           TravelInfo: responseData?.data[0]?.TravelInfo ?? null,
-          UpdateTime: responseData?.data[0]?.UpdateTime,
-          ZipCode: responseData?.data[0]?.ZipCode,
+          UpdateTime: responseData?.data[0]?.UpdateTime ?? null,
+          ZipCode: responseData?.data[0]?.ZipCode ?? null,
         };
       } else {
         // handle error (後端錯誤) -> not found page(404 page)
@@ -167,6 +181,40 @@ export async function getServerSideProps({ params, query, locale }) {
     // --------------------------------------------------------
     // activity: call API 取得特定觀光活動資料
     case 'activity':
+      responseData = await getActivityAPI({
+        filter: `ActivityID eq '${did}'`,
+      });
+
+      if (responseData?.status === 'success') {
+        // handle success (取得觀光活動資料)
+        detailData = {
+          QueryType: type,
+          Address: responseData?.data[0]?.Address ?? null,
+          City: responseData?.data[0]?.City ?? null,
+          Location: responseData?.data[0]?.Location ?? null,
+          Description: responseData?.data[0]?.Description ?? null,
+          OpenTime:
+            moment(responseData?.data[0]?.StartTime, moment.ISO_8601)
+              .tz('Asia/Taipei')
+              .format('YYYY-MM-DD') +
+            ' ~ ' +
+            moment(responseData?.data[0]?.EndTime, moment.ISO_8601)
+              .tz('Asia/Taipei')
+              .format('YYYY-MM-DD'),
+          Phone: responseData?.data[0]?.Phone ?? null,
+          Picture: responseData?.data[0]?.Picture ?? null,
+          Position: responseData?.data[0]?.Position ?? null,
+          SpotID: responseData?.data[0]?.ActivityID ?? null,
+          SpotName: responseData?.data[0]?.ActivityName ?? null,
+          SrcUpdateTime: responseData?.data[0]?.SrcUpdateTime ?? null,
+          UpdateTime: responseData?.data[0]?.UpdateTime ?? null,
+        };
+      } else {
+        // handle error (後端錯誤) -> not found page(404 page)
+        return {
+          notFound: true,
+        };
+      }
       break;
 
     // --------------------------------------------------------

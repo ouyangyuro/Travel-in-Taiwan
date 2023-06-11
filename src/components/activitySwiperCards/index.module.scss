@@ -72,6 +72,7 @@
               align-items: center;
 
               > svg {
+                flex-shrink: 0;
                 margin-right: 5px;
                 width: 1.28rem; // 18px
                 fill: $primary;

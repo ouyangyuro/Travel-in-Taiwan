@@ -34,6 +34,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'penghutravel.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.taiwan.net.tw',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.trimt-nsa.gov.tw',
+      },
     ],
   },
 

@@ -4,5 +4,11 @@
     "title": "Explore",
     "subject": "Formosa"
   },
+  "type_title": {
+    "scenicSpot": "Popular Attractions",
+    "activity": "Sightseeing Activities",
+    "restaurant": "Food Tour",
+    "hotel ": "Recommended Lodgings"
+  },
   "destination": "Destinations"
 }

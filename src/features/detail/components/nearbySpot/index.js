@@ -1,6 +1,7 @@
 import { useTranslation } from 'next-i18next';
 
-import SpotSwiperCards from '@components/spotSwiperCards';
+import ScenicSpotSwiperCards from '@components/scenicSpotSwiperCards';
+import ActivitySwiperCards from '@components/activitySwiperCards';
 import SwiperCardsLoading from '@components/swiperCardsLoading';
 import Head from 'src/features/detail/components/head';
 
@@ -37,20 +38,47 @@ function NearbySpot({ queryType, position, spotID }) {
   });
   // console.log('取得附近景點資料:', status, data, error); //FIXME:
 
+  /** ---------------------------------------------------------------------------------------------
+   * Head title type
+   */
+  const handleHeadType = () => {
+    switch (queryType) {
+      case 'scenicSpot':
+        return t('scenic_spot.more_spot');
+      case 'restaurant':
+        return;
+      case 'hotel':
+        return;
+      case 'activity':
+        return t('activity.more_spot');
+
+      default:
+        console.log('No match title'); //FIXME:
+    }
+  };
+
   // ---------------------------------------------------------------------------------------------
 
   return (
     <>
       <div className="w-full mt-6">
-        <Head title={t('scenic_spot.more_spot')} />
-        {status === 'success' && (
+        <Head title={handleHeadType()} />
+        {queryType === 'scenicSpot' && status === 'success' && (
           <div className="mt-4">
-            <SpotSwiperCards
-              type={queryType}
+            <ScenicSpotSwiperCards
               lists={data.filter((d) => d.ScenicSpotID !== spotID)}
             />
           </div>
         )}
+
+        {queryType === 'activity' && status === 'success' && (
+          <div className="mt-4">
+            <ActivitySwiperCards
+              lists={data.filter((d) => d.ActivityID !== spotID)}
+            />
+          </div>
+        )}
+
         {(status === undefined ||
           status === 'loading' ||
           status === 'cancel') && (

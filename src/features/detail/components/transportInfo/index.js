@@ -26,7 +26,9 @@ function TransportInfo({ travelInfo, position }) {
       <div className="w-full mt-6">
         <Head title={t('traffic')} />
         <DynamicMap position={location} />
-        <p className="mt-4 text-base text-text_primary">{travelInfo}</p>
+        {travelInfo && (
+          <p className="mt-4 text-base text-text_primary">{travelInfo}</p>
+        )}
       </div>
     </>
   );
