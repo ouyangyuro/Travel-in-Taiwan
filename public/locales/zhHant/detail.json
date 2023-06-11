@@ -3,5 +3,9 @@
     "introduce": "景點介紹",
     "more_spot": "附近景點"
   },
+  "activity": {
+    "introduce": "活動介紹",
+    "more_spot": "附近活動"
+  },
   "traffic": "交通方式"
 }

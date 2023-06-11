@@ -3,5 +3,9 @@
     "introduce": "Scenic spot introduction",
     "more_spot": "Nearby attractions"
   },
+  "activity": {
+    "introduce": "Activity introduction",
+    "more_spot": "Nearby activities"
+  },
   "traffic": "Transportation"
 }

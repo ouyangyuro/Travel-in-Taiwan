@@ -1,12 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 
-import getScenicSpotAPI from 'src/api/getScenicSpotAPI';
 import getActivityAPI from 'src/api/getActivityAPI';
 
 /** -------------------------------------------------------------------------------------------------------------------
- * 取得附近資料 API
- * @param  {string}    queryType     query ('scenicSpot', 'restaurant', 'hotel', 'activity')
- * @param  {object}    position      所在地
+ * 取得所有觀光活動資料 API
  *
  * @return {undefined|string}    status       API 狀態
  *                                            - undefined: 初始
@@ -18,7 +15,7 @@ import getActivityAPI from 'src/api/getActivityAPI';
  * @return {undefined|object}    pagination   存 api 回傳的分頁資料
  * @return {undefined|string}    error        error message
  */
-const useGetNearybySpot = ({ queryType, position }) => {
+const useGetActivity = () => {
   /** ---------------------------------------------------------------------------------------------
    * State
    *
@@ -60,11 +57,11 @@ const useGetNearybySpot = ({ queryType, position }) => {
 
   /** ---------------------------------------------------------------------------------------------
    * Hook
-   * 名稱: 取得附近資料
+   * 名稱: 取得所有觀光活動資料
    */
   useEffect(() => {
-    const handleSpot = async () => {
-      console.log(`~~~~取得附近觀光${queryType}資料~~~~`); //FIXME:
+    const handleActivity = async () => {
+      console.log(`~~~~取得所有觀光活動資料~~~~`); //FIXME:
 
       // loading
       setStatus('loading');
@@ -75,50 +72,16 @@ const useGetNearybySpot = ({ queryType, position }) => {
       // 創建API請求
       apiControllerRef.current = new AbortController();
 
-      let responseData;
-
-      switch (queryType) {
-        // --------------------------------------------------------
-        // call API 取得附近觀光景點資料
-        case 'scenicSpot':
-          responseData = await getScenicSpotAPI({
-            signal: apiControllerRef.current.signal,
-            top: 10,
-            spatialFilter: `nearby(${position.PositionLat},${position.PositionLon},50000)`,
-            select: 'ScenicSpotID,ScenicSpotName,Picture,Address,City,OpenTime',
-          });
-          break;
-
-        // --------------------------------------------------------
-        // call API 取得附近觀光餐飲資料
-        case 'restaurant':
-          break;
-
-        // --------------------------------------------------------
-        // call API 取得附近觀光旅宿資料
-        case 'hotel':
-          break;
-
-        // --------------------------------------------------------
-        // call API 取得附近觀光活動資料
-        case 'activity':
-          responseData = await getActivityAPI({
-            signal: apiControllerRef.current.signal,
-            top: 10,
-            spatialFilter: `nearby(${position.PositionLat},${position.PositionLon},50000)`,
-            select:
-              'ActivityID,ActivityName,Picture,Address,City,StartTime,EndTime',
-          });
-          break;
-
-        default:
-          break;
-      }
+      // call API 取得所有觀光活動資料
+      const responseData = await getActivityAPI({
+        signal: apiControllerRef.current.signal,
+        top: 10,
+      });
 
       // 確保在此頁執行
       if (isMountedRef.current) {
         if (responseData?.status === 'success') {
-          // handle success (取得附近資料)
+          // handle success (取得觀光活動資料)
           setData(responseData?.data);
           setPagination(responseData?.pagination);
           setStatus('success');
@@ -133,8 +96,8 @@ const useGetNearybySpot = ({ queryType, position }) => {
       }
     };
 
-    handleSpot();
-  }, [queryType, position]);
+    handleActivity();
+  }, []);
 
   // ---------------------------------------------------------------------------------------------
 
@@ -146,4 +109,4 @@ const useGetNearybySpot = ({ queryType, position }) => {
   };
 };
 
-export default useGetNearybySpot;
+export default useGetActivity;

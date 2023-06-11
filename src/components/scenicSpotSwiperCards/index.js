@@ -8,14 +8,13 @@ import 'swiper/css';
 import styles from './index.module.scss';
 
 /** ---------------------------------------------------------------------------------------------------------------------
- * Components: Spot Swiper Cards
- * @param  {string}    type     類型 ('scenicSpot', 'restaurant, 'hotel', 'activity')
+ * Components: Scenic Spot Swiper Cards
  * @param  {array}     lists    cards 列表
  *
  * @return {html}
  */
 
-function SpotSwiperCards({ type, lists }) {
+function ScenicSpotSwiperCards({ lists }) {
   // ---------------------------------------------------------------------------------------------
 
   return (
@@ -33,7 +32,7 @@ function SpotSwiperCards({ type, lists }) {
                 className={styles.swiperSlide}
               >
                 <Link
-                  href={`/detail/${type}/?did=${item.ScenicSpotID}`}
+                  href={`/detail/scenicSpot/?did=${item.ScenicSpotID}`}
                   title={item.ScenicSpotName}
                   className={`${styles.perCard} shadow transition duration-150 ease-out hover:scale-95`}
                 >
@@ -48,7 +47,7 @@ function SpotSwiperCards({ type, lists }) {
                     <h3>{item.ScenicSpotName}</h3>
                     <div className={styles.intro}>
                       <MapPinIcon />
-                      <p>{item.Address.slice(0, 3)}</p>
+                      <p>{item.City ?? item.Address.slice(0, 3)}</p>
                     </div>
 
                     <div className={styles.intro}>
@@ -65,4 +64,4 @@ function SpotSwiperCards({ type, lists }) {
   );
 }
 
-export default SpotSwiperCards;
+export default ScenicSpotSwiperCards;

@@ -4,5 +4,11 @@
     "title": "探索。",
     "subject": "福爾摩沙"
   },
+  "type_title": {
+    "scenicSpot": "熱門景點",
+    "activity": "觀光活動",
+    "restaurant": "美食品嘗",
+    "hotel ": "住宿推薦"
+  },
   "destination": "目的地"
 }

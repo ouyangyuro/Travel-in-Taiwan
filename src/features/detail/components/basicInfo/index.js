@@ -21,10 +21,12 @@ function Info({ address, openTime, phone }) {
           <ClockIcon className="w-[1.28rem] h-[1.28rem] mr-2 shrink-0 text-primary" />
           {openTime}
         </p>
-        <p className="flex items-center mt-2 ipad:mt-4">
-          <PhoneIcon className="w-[1.28rem] h-[1.28rem] mr-2 shrink-0 text-primary" />
-          {phone}
-        </p>
+        {phone && (
+          <p className="flex items-center mt-2 ipad:mt-4">
+            <PhoneIcon className="w-[1.28rem] h-[1.28rem] mr-2 shrink-0 text-primary" />
+            {phone}
+          </p>
+        )}
       </div>
     </>
   );
