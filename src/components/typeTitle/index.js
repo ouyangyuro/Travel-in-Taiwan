@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { MapPinIcon, ClockIcon, PhoneIcon } from '@heroicons/react/24/solid';
 
 /** ---------------------------------------------------------------------------------------------------------------------
@@ -20,3 +21,7 @@ function TypeTitle({ title }) {
 }
 
 export default TypeTitle;
+
+TypeTitle.propTypes = {
+  title: PropTypes.string,
+};

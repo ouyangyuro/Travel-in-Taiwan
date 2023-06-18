@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Image from 'next/image';
 
 import styles from './index.module.scss';
@@ -37,3 +38,9 @@ function TopBanner({ title, subject, imgSrc = '/images/banner.png' }) {
 }
 
 export default TopBanner;
+
+TopBanner.propTypes = {
+  title: PropTypes.string,
+  subject: PropTypes.string,
+  imgSrc: PropTypes.string,
+};
