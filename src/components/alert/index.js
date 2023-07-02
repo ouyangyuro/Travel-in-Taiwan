@@ -21,10 +21,10 @@ function Alert({
     <>
       <div
         className={`z-[200] fixed top-5 left-2 right-2 ipad:left-1/2 ipad:translate-x-[-50%] px-4 py-3 rounded flex justify-between items-center border ${
-          severity === 'error' && 'border-red-400 text-red-700 bg-red-100'
+          severity === 'error' && 'border-rose-400 text-rose-700 bg-rose-100'
         } ${
           severity === 'success' &&
-          'border-green-400 text-green-700 bg-green-100'
+          'border-teal-400 text-teal-700 bg-teal-100'
         } transition duration-150 ease-out ${open ? 'opacity-1' : 'opacity-0 hidden'}`}
         role="alert"
       >
@@ -32,8 +32,8 @@ function Alert({
         <button className="px-4 py-3" onClick={onClose}>
           <XMarkIcon
             className={`fill-current h-6 w-6 ${
-              severity === 'error' && 'text-red-500'
-            } ${severity === 'success' && 'text-green-500'}`}
+              severity === 'error' && 'text-rose-500'
+            } ${severity === 'success' && 'text-teal-500'}`}
           />
         </button>
       </div>
