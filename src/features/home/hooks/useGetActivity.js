@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import moment from 'moment-timezone';
 
 import getActivityAPI from 'src/api/getActivityAPI';
 
@@ -72,10 +73,14 @@ const useGetActivity = () => {
       // 創建API請求
       apiControllerRef.current = new AbortController();
 
+      // 宣告台北時區
+      const time = moment(new Date(), 'Asia/Taipei').format('YYYY-MM-DD');
+
       // call API 取得所有觀光活動資料
       const responseData = await getActivityAPI({
         signal: apiControllerRef.current.signal,
         top: 10,
+        filter: `Picture/PictureUrl1 ne null and EndTime ge ${time}`,
       });
 
       // 確保在此頁執行
