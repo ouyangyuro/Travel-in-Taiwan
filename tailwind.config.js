@@ -1,11 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './app/**/*.{js,ts,jsx,tsx}',
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-
-    // Or if using `src` directory:
+    // using `src` directory:
     './src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
@@ -33,6 +29,15 @@ module.exports = {
         primary: 'var(--primary)',
         light_primary: 'var(--light_primary)',
         pale_primary: 'var(--pale_primary)',
+        secondary: 'var(--secondary)',
+        light_secondary: 'var(--light_secondary)',
+        pale_secondary: 'var(--pale_secondary)',
+        tertiary: 'var(--tertiary)',
+        light_tertiary: 'var(--light_tertiary)',
+        pale_tertiary: 'var(--pale_tertiary)',
+        quaternary: 'var(--quaternary)',
+        light_quaternary: 'var(--light_quaternary)',
+        pale_quaternary: 'var(--pale_quaternary)',
         text_primary: 'var(--text_primary)',
         text_second: 'var(--text_second)',
         text_tertiary: 'var(--text_tertiary)',

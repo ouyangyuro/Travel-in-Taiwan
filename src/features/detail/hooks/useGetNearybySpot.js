@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
+import moment from 'moment-timezone';
 
 import getScenicSpotAPI from 'src/api/getScenicSpotAPI';
 import getActivityAPI from 'src/api/getActivityAPI';
+import getRestaurantAPI from 'src/api/getRestaurantAPI';
 
 /** -------------------------------------------------------------------------------------------------------------------
  * 取得附近資料 API
@@ -92,6 +94,12 @@ const useGetNearybySpot = ({ queryType, position }) => {
         // --------------------------------------------------------
         // call API 取得附近觀光餐飲資料
         case 'restaurant':
+          responseData = await getRestaurantAPI({
+            signal: apiControllerRef.current.signal,
+            top: 10,
+            spatialFilter: `nearby(${position.PositionLat},${position.PositionLon},50000)`,
+            select: 'RestaurantID,RestaurantName,Picture,Address,OpenTime',
+          });
           break;
 
         // --------------------------------------------------------
@@ -102,12 +110,15 @@ const useGetNearybySpot = ({ queryType, position }) => {
         // --------------------------------------------------------
         // call API 取得附近觀光活動資料
         case 'activity':
+          // 宣告台北時區
+          const time = moment(new Date(), 'Asia/Taipei').format('YYYY-MM-DD');
           responseData = await getActivityAPI({
             signal: apiControllerRef.current.signal,
             top: 10,
             spatialFilter: `nearby(${position.PositionLat},${position.PositionLon},50000)`,
             select:
               'ActivityID,ActivityName,Picture,Address,City,StartTime,EndTime',
+            filter: `Picture/PictureUrl1 ne null and EndTime ge ${time}`,
           });
           break;
 

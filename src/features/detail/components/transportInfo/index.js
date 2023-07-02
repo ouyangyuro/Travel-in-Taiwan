@@ -9,10 +9,11 @@ const DynamicMap = dynamic(() => import('src/features/detail/components/map'), {
 /** ---------------------------------------------------------------------------------------------------------------------
  * @param  {string}    travelInfo     旅行交通資訊
  * @param  {object}    position       經緯度
+ * @param  {string}    [titleColor]   title 顏色
  *
  * @return {html}
  */
-function TransportInfo({ travelInfo, position }) {
+function TransportInfo({ travelInfo, position, titleColor }) {
   /** ---------------------------------------------------------------------------------------------
    * Basic
    */
@@ -24,7 +25,7 @@ function TransportInfo({ travelInfo, position }) {
   return (
     <>
       <div className="w-full mt-6">
-        <Head title={t('traffic')} />
+        <Head title={t('traffic')} titleColor={titleColor} />
         <DynamicMap position={location} />
         {travelInfo && (
           <p className="mt-4 text-base text-text_primary">{travelInfo}</p>

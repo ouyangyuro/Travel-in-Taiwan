@@ -28,6 +28,11 @@ const nextConfig = {
       'picsum.photos',
       'www.eastcoast-nsa.gov.tw',
       'www.penghu-nsa.gov.tw',
+      'tourism.chcg.gov.tw',
+      'www.facebook.com',
+      'drive.google.com',
+      'www.matsu-nsa.gov.tw',
+      'www.sunmoonlake.gov.tw',
     ],
     remotePatterns: [
       {
@@ -42,8 +47,13 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'www.trimt-nsa.gov.tw',
       },
+      {
+        protocol: 'https',
+        hostname: 'tour.yunlin.gov.tw',
+      },
     ],
   },
+  output: 'standalone',
 
   /* ---------------------------------------------------------------------------------------------
    * SASS & SCSS

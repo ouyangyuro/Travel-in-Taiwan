@@ -7,11 +7,13 @@ import TopBanner from '@components/topBanner';
 import TypeTitle from '@components/typeTitle';
 import ScenicSpotSwiperCards from '@components/scenicSpotSwiperCards';
 import ActivitySwiperCards from '@components/activitySwiperCards';
+import RestaurantSwiperCards from '@components/restaurantSwiperCards';
 import SwiperCardsLoading from '@components/swiperCardsLoading';
 
 import SearchBtn from 'src/features/home/components/searchBtn';
 import useGetScenicSpot from 'src/features/home/hooks/useGetScenicSpot';
 import useGetActivity from 'src/features/home/hooks/useGetActivity';
+import useGetRestaurant from 'src/features/home/hooks/useGetRestaurant';
 
 import styles from './index.module.scss';
 
@@ -59,6 +61,25 @@ export default function Home() {
   } = useGetActivity();
   // console.log(activityStatus, activityData, activityError); //FIXME:
 
+    /** ---------------------------------------------------------------------------------------------
+   * Hook
+   * 名稱: 取得所有觀光餐飲資料 API
+   * @type {undefined|string}    status       API 狀態
+   *                                            - undefined: 初始
+   *                                            - "loading": 讀取
+   *                                            - "success": 成功
+   *                                            - "error"  : 失敗
+   *                                            - "cancel" : 取消
+   * @type {undefined|array}     data         觀光餐飲資料
+   * @type {undefined|string}    error        error message
+   */
+    const {
+      status: restaurantStatus,
+      data: restaurantData,
+      error: restaurantError,
+    } = useGetRestaurant();
+    // console.log(restaurantStatus, restaurantData, restaurantError); //FIXME:
+
   // ---------------------------------------------------------------------------------------------
 
   return (
@@ -86,7 +107,10 @@ export default function Home() {
           )}
 
           <div className="mt-6">
-            <TypeTitle title={t('type_title.activity')} />
+            <TypeTitle
+              title={t('type_title.activity')}
+              iconColor="var(--secondary)"
+            />
           </div>
           {activityStatus === 'success' && (
             <div className="mt-4 mb-10">
@@ -100,6 +124,27 @@ export default function Home() {
               <SwiperCardsLoading />
             </div>
           )}
+
+          <div className="mt-6">
+            <TypeTitle title={t('type_title.restaurant')} 
+            iconColor="var(--quaternary)" />
+          </div>
+          {restaurantStatus === 'success' && (
+            <div className="mt-4 mb-10">
+              <RestaurantSwiperCards lists={restaurantData} />
+            </div>
+          )}
+          {(restaurantStatus === undefined ||
+            restaurantStatus === 'loading' ||
+            restaurantStatus === 'cancel') && (
+            <div className="mt-4 mb-10">
+              <SwiperCardsLoading />
+            </div>
+          )}
+
+          <div className="mt-6">
+            <TypeTitle title={t('type_title.hotel')} iconColor="var(--tertiary)" />
+          </div>
         </div>
       </div>
     </>

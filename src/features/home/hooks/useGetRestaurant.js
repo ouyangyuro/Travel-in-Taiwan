@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import moment from 'moment-timezone';
 
-import getActivityAPI from 'src/api/getActivityAPI';
+import getRestaurantAPI from 'src/api/getRestaurantAPI';
 
 /** -------------------------------------------------------------------------------------------------------------------
- * 取得所有觀光活動資料 API
+ * 取得所有觀光餐飲資料 API
  *
  * @return {undefined|string}    status       API 狀態
  *                                            - undefined: 初始
@@ -16,7 +15,7 @@ import getActivityAPI from 'src/api/getActivityAPI';
  * @return {undefined|object}    pagination   存 api 回傳的分頁資料
  * @return {undefined|string}    error        error message
  */
-const useGetActivity = () => {
+const useGetRestaurant = () => {
   /** ---------------------------------------------------------------------------------------------
    * State
    *
@@ -58,11 +57,11 @@ const useGetActivity = () => {
 
   /** ---------------------------------------------------------------------------------------------
    * Hook
-   * 名稱: 取得所有觀光活動資料
+   * 名稱: 取得所有觀光餐飲資料
    */
   useEffect(() => {
-    const handleActivity = async () => {
-      console.log(`~~~~取得所有觀光活動資料~~~~`); //FIXME:
+    const handleRestaurant = async () => {
+      console.log(`~~~~取得所有觀光餐飲資料~~~~`); //FIXME:
 
       // loading
       setStatus('loading');
@@ -73,20 +72,16 @@ const useGetActivity = () => {
       // 創建API請求
       apiControllerRef.current = new AbortController();
 
-      // 宣告台北時區
-      const time = moment(new Date(), 'Asia/Taipei').format('YYYY-MM-DD');
-
-      // call API 取得所有觀光活動資料
-      const responseData = await getActivityAPI({
+      // call API 取得所有觀光餐飲資料
+      const responseData = await getRestaurantAPI({
         signal: apiControllerRef.current.signal,
         top: 10,
-        filter: `Picture/PictureUrl1 ne null and EndTime ge ${time}`,
       });
 
       // 確保在此頁執行
       if (isMountedRef.current) {
         if (responseData?.status === 'success') {
-          // handle success (取得觀光活動資料)
+          // handle success (取得觀光餐飲資料)
           setData(responseData?.data);
           setPagination(responseData?.pagination);
           setStatus('success');
@@ -101,7 +96,7 @@ const useGetActivity = () => {
       }
     };
 
-    handleActivity();
+    handleRestaurant();
   }, []);
 
   // ---------------------------------------------------------------------------------------------
@@ -114,4 +109,4 @@ const useGetActivity = () => {
   };
 };
 
-export default useGetActivity;
+export default useGetRestaurant;

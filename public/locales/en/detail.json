@@ -7,5 +7,13 @@
     "introduce": "Activity introduction",
     "more_spot": "Nearby activities"
   },
+  "restaurant": {
+    "introduce": "Restaurant introduction",
+    "more_spot": "Nearby restaurants"
+  },
+  "hotel": {
+    "introduce": "Hotel introduction",
+    "more_spot": "Nearby hotels"
+  },
   "traffic": "Transportation"
 }

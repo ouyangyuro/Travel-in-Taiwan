@@ -5,10 +5,11 @@ import Head from 'src/features/detail/components/head';
 /** ---------------------------------------------------------------------------------------------------------------------
  * @param  {string}    queryType     query ('scenicSpot', 'restaurant', 'hotel', 'activity')
  * @param  {string}    descriptionDetail     詳細介紹
+ * @param  {string}    [titleColor]          title 顏色
  *
  * @return {html}
  */
-function SpotIntroduce({ queryType, descriptionDetail }) {
+function SpotIntroduce({ queryType, descriptionDetail, titleColor }) {
   /** ---------------------------------------------------------------------------------------------
    * Basic
    */
@@ -22,9 +23,9 @@ function SpotIntroduce({ queryType, descriptionDetail }) {
       case 'scenicSpot':
         return t('scenic_spot.introduce');
       case 'restaurant':
-        return;
+        return t('restaurant.introduce');
       case 'hotel':
-        return;
+        return t('hotel.introduce');
       case 'activity':
         return t('activity.introduce');
 
@@ -38,7 +39,7 @@ function SpotIntroduce({ queryType, descriptionDetail }) {
   return (
     <>
       <div className="w-full mt-6">
-        <Head title={handleHeadType()} />
+        <Head title={handleHeadType()} titleColor={titleColor} />
         <p className="mt-4 text-base text-text_primary">{descriptionDetail}</p>
       </div>
     </>

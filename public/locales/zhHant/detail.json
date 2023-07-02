@@ -7,5 +7,13 @@
     "introduce": "活動介紹",
     "more_spot": "附近活動"
   },
+  "restaurant": {
+    "introduce": "餐廳介紹",
+    "more_spot": "附近餐廳"
+  },
+  "hotel": {
+    "introduce": "住宿介紹",
+    "more_spot": "附近住宿"
+  },
   "traffic": "交通方式"
 }
