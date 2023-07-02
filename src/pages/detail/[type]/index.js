@@ -14,6 +14,7 @@ import NearbySpot from 'src/features/detail/components/nearbySpot';
 
 import getScenicSpotAPI from 'src/api/getScenicSpotAPI';
 import getActivityAPI from 'src/api/getActivityAPI';
+import getRestaurantAPI from 'src/api/getRestaurantAPI';
 
 import styles from './index.module.scss';
 
@@ -34,6 +35,7 @@ export default function Detail({ data }) {
    * @type {string}     Remarks               注意事項
    * @type {string}     SpotID                觀光資訊的 ID
    * @type {string}     SpotName              觀光資訊的標題
+   * @type {string}     WebsiteUrl            觀光資訊的官網
    * @type {string}     SrcUpdateTime         資料來源更新時間
    * @type {string}     TicketInfo            收費資訊
    * @type {string}     TravelInfo            旅行交通資訊
@@ -55,13 +57,51 @@ export default function Detail({ data }) {
     Remarks,
     SpotID,
     SpotName,
+    WebsiteUrl,
     SrcUpdateTime,
     TicketInfo,
     TravelInfo,
     UpdateTime,
     ZipCode,
   } = data.detailData;
-  //   console.log(data.detailData); //FIXME:
+
+  /** ---------------------------------------------------------------------------------------------
+   * diff queryType bgcolor
+   */
+  const handleTypeBgColor = () => {
+    switch (QueryType) {
+      case 'scenicSpot':
+        return;
+      case 'restaurant':
+        return 'var(--pale_quaternary)';
+      case 'hotel':
+        return 'var(--pale_tertiary)';
+      case 'activity':
+        return 'var(--pale_secondary)';
+
+      default:
+        console.log('No match color'); //FIXME:
+    }
+  };
+
+  /** ---------------------------------------------------------------------------------------------
+   * diff queryType title color
+   */
+  const handleTitleColor = () => {
+    switch (QueryType) {
+      case 'scenicSpot':
+        return;
+      case 'restaurant':
+        return 'var(--quaternary)';
+      case 'hotel':
+        return 'var(--tertiary)';
+      case 'activity':
+        return 'var(--secondary)';
+
+      default:
+        console.log('No match color'); //FIXME:
+    }
+  };
 
   // ---------------------------------------------------------------------------------------------
 
@@ -83,16 +123,44 @@ export default function Detail({ data }) {
             placeholder="blur"
             blurDataURL={'/images/logo-loading.png'}
           />
-          <BasicInfo address={Address} openTime={OpenTime} phone={Phone} />
+          {/* <img
+            src={Picture.PictureUrl1}
+            // FIXME: google drive 要額外處理 src="https://drive.google.com/uc?export=view&id=1sTBlDyxqpVFArapy8jDR_gC_SeWjgqJa"
+            alt={Picture.PictureDescription1}
+            className={`w-full h-40 ipad:h-80 desktop:h-96 mt-5 rounded`}
+            style={{ objectFit: 'cover' }}
+          /> TODO: 保留因為next image 不穩定 */}
+          {/* <div
+            className={`w-full h-40 ipad:h-80 desktop:h-96 mt-5 rounded`}
+            style={{
+              backgroundImage: `url("${Picture.PictureUrl1}")`,
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+            }}
+          ></div> TODO: 保留因為next image 不穩定 */}
+          <BasicInfo
+            address={Address}
+            openTime={OpenTime}
+            phone={Phone}
+            backgroundColor={handleTypeBgColor()}
+            iconColor={handleTitleColor()}
+          />
           <SpotIntroduce
             queryType={QueryType}
             descriptionDetail={DescriptionDetail ?? Description}
+            titleColor={handleTitleColor()}
           />
-          <TransportInfo travelInfo={TravelInfo} position={Position} />
+          <TransportInfo
+            travelInfo={TravelInfo}
+            position={Position}
+            titleColor={handleTitleColor()}
+          />
           <NearbySpot
             queryType={QueryType}
             position={Position}
             spotID={SpotID}
+            titleColor={handleTitleColor()}
           />
         </div>
       </div>
@@ -122,6 +190,7 @@ export async function getServerSideProps({ params, query, locale }) {
     Remarks: undefined,
     SpotID: undefined,
     SpotName: undefined,
+    WebsiteUrl: undefined,
     SrcUpdateTime: undefined,
     TicketInfo: undefined,
     TravelInfo: undefined,
@@ -171,6 +240,33 @@ export async function getServerSideProps({ params, query, locale }) {
     // --------------------------------------------------------
     // restaurant: call API 取得特定觀光餐飲資料
     case 'restaurant':
+      responseData = await getRestaurantAPI({
+        filter: `RestaurantID eq '${did}'`,
+      });
+
+      if (responseData?.status === 'success') {
+        // handle success (取得觀光餐飲資料)
+        detailData = {
+          QueryType: type,
+          Address: responseData?.data[0]?.Address ?? null,
+          Description: responseData?.data[0]?.Description ?? null,
+          OpenTime: responseData?.data[0]?.OpenTime ?? null,
+          Phone: responseData?.data[0]?.Phone ?? null,
+          Picture: responseData?.data[0]?.Picture ?? null,
+          Position: responseData?.data[0]?.Position ?? null,
+          SpotID: responseData?.data[0]?.RestaurantID ?? null,
+          SpotName: responseData?.data[0]?.RestaurantName ?? null,
+          WebsiteUrl: responseData?.data[0]?.WebsiteUrl ?? null,
+          SrcUpdateTime: responseData?.data[0]?.SrcUpdateTime ?? null,
+          UpdateTime: responseData?.data[0]?.UpdateTime ?? null,
+          ZipCode: responseData?.data[0]?.ZipCode ?? null,
+        };
+      } else {
+        // handle error (後端錯誤) -> not found page(404 page)
+        return {
+          notFound: true,
+        };
+      }
       break;
 
     // --------------------------------------------------------

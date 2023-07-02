@@ -3,18 +3,20 @@ import { useTranslation } from 'next-i18next';
 import ScenicSpotSwiperCards from '@components/scenicSpotSwiperCards';
 import ActivitySwiperCards from '@components/activitySwiperCards';
 import SwiperCardsLoading from '@components/swiperCardsLoading';
+import RestaurantSwiperCards from '@components/restaurantSwiperCards';
 import Head from 'src/features/detail/components/head';
 
 import useGetNearybySpot from 'src/features/detail/hooks/useGetNearybySpot';
 
 /** ---------------------------------------------------------------------------------------------------------------------
- * @param  {string}    queryType     query ('scenicSpot', 'restaurant', 'hotel', 'activity')
- * @param  {object}    position      所在地
- * @param  {string}    spotID        觀光資訊的 ID
+ * @param  {string}    queryType      query ('scenicSpot', 'restaurant', 'hotel', 'activity')
+ * @param  {object}    position       所在地
+ * @param  {string}    spotID         觀光資訊的 ID
+ * @param  {string}    [titleColor]   title 顏色
  *
  * @return {html}
  */
-function NearbySpot({ queryType, position, spotID }) {
+function NearbySpot({ queryType, position, spotID, titleColor }) {
   /** ---------------------------------------------------------------------------------------------
    * Basic
    */
@@ -46,9 +48,9 @@ function NearbySpot({ queryType, position, spotID }) {
       case 'scenicSpot':
         return t('scenic_spot.more_spot');
       case 'restaurant':
-        return;
+        return t('restaurant.more_spot');
       case 'hotel':
-        return;
+        return t('hotel.more_spot');
       case 'activity':
         return t('activity.more_spot');
 
@@ -62,7 +64,7 @@ function NearbySpot({ queryType, position, spotID }) {
   return (
     <>
       <div className="w-full mt-6">
-        <Head title={handleHeadType()} />
+        <Head title={handleHeadType()} titleColor={titleColor} />
         {queryType === 'scenicSpot' && status === 'success' && (
           <div className="mt-4">
             <ScenicSpotSwiperCards
@@ -75,6 +77,14 @@ function NearbySpot({ queryType, position, spotID }) {
           <div className="mt-4">
             <ActivitySwiperCards
               lists={data.filter((d) => d.ActivityID !== spotID)}
+            />
+          </div>
+        )}
+
+        {queryType === 'restaurant' && status === 'success' && (
+          <div className="mt-4">
+            <RestaurantSwiperCards
+              lists={data.filter((d) => d.RestaurantID !== spotID)}
             />
           </div>
         )}
