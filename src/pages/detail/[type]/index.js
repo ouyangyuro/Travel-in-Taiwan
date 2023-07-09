@@ -15,6 +15,7 @@ import NearbySpot from 'src/features/detail/components/nearbySpot';
 import getScenicSpotAPI from 'src/api/getScenicSpotAPI';
 import getActivityAPI from 'src/api/getActivityAPI';
 import getRestaurantAPI from 'src/api/getRestaurantAPI';
+import getHotelAPI from 'src/api/getHotelAPI';
 
 import styles from './index.module.scss';
 
@@ -203,7 +204,7 @@ export async function getServerSideProps({ params, query, locale }) {
   switch (type) {
     // --------------------------------------------------------
     // scenicSpot: call API 取得特定觀光景點資料
-    case 'scenicSpot':
+    case 'scenicSpot': {
       responseData = await getScenicSpotAPI({
         filter: `ScenicSpotID eq '${did}'`,
       });
@@ -236,10 +237,11 @@ export async function getServerSideProps({ params, query, locale }) {
         };
       }
       break;
+    }
 
     // --------------------------------------------------------
     // restaurant: call API 取得特定觀光餐飲資料
-    case 'restaurant':
+    case 'restaurant': {
       responseData = await getRestaurantAPI({
         filter: `RestaurantID eq '${did}'`,
       });
@@ -268,15 +270,44 @@ export async function getServerSideProps({ params, query, locale }) {
         };
       }
       break;
+    }
 
     // --------------------------------------------------------
     // hotel: call API 取得特定觀光旅宿資料
-    case 'hotel':
+    case 'hotel': {
+      responseData = await getHotelAPI({
+        filter: `HotelID eq '${did}'`,
+      });
+
+      if (responseData?.status === 'success') {
+        // handle success (取得觀光旅宿資料)
+        detailData = {
+          QueryType: type,
+          Address: responseData?.data[0]?.Address ?? null,
+          Description: responseData?.data[0]?.Description ?? null,
+          Phone: responseData?.data[0]?.Phone ?? null,
+          Picture: responseData?.data[0]?.Picture ?? null,
+          Position: responseData?.data[0]?.Position ?? null,
+          SpotID: responseData?.data[0]?.HotelID ?? null,
+          SpotName: responseData?.data[0]?.HotelName ?? null,
+          WebsiteUrl: responseData?.data[0]?.WebsiteUrl ?? null,
+          TravelInfo: responseData?.data[0]?.ParkingInfo ?? null,
+          SrcUpdateTime: responseData?.data[0]?.SrcUpdateTime ?? null,
+          UpdateTime: responseData?.data[0]?.UpdateTime ?? null,
+          ZipCode: responseData?.data[0]?.ZipCode ?? null,
+        };
+      } else {
+        // handle error (後端錯誤) -> not found page(404 page)
+        return {
+          notFound: true,
+        };
+      }
       break;
+    }
 
     // --------------------------------------------------------
     // activity: call API 取得特定觀光活動資料
-    case 'activity':
+    case 'activity': {
       responseData = await getActivityAPI({
         filter: `ActivityID eq '${did}'`,
       });
@@ -312,6 +343,7 @@ export async function getServerSideProps({ params, query, locale }) {
         };
       }
       break;
+    }
 
     // --------------------------------------------------------
     // error -> not found page(404 page)

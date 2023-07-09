@@ -17,14 +17,14 @@ function TopBanner({ title, subject, imgSrc = '/images/banner.png' }) {
   return (
     <>
       <div className={styles.banner}>
-        <h1>
+        <h1 className="text-text_primary">
           <span>{title}</span>
           <span>{subject}</span>
         </h1>
         <div className={styles.imgBox}>
           <Image
             src={imgSrc}
-            alt="example"
+            alt="banner"
             width="0"
             height="0"
             sizes="100vw"

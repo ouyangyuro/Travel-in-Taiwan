@@ -33,6 +33,7 @@ const nextConfig = {
       'drive.google.com',
       'www.matsu-nsa.gov.tw',
       'www.sunmoonlake.gov.tw',
+      'taiwan.taiwanstay.net.tw',
     ],
     remotePatterns: [
       {
@@ -53,6 +54,7 @@ const nextConfig = {
       },
     ],
   },
+  // https://nextjs.org/docs/messages/sharp-missing-in-production
   output: 'standalone',
 
   /* ---------------------------------------------------------------------------------------------
