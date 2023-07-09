@@ -18,20 +18,24 @@ function Info({ address, openTime, phone, backgroundColor, iconColor }) {
         className="w-full mt-6 p-4 rounded-lg bg-pale_primary text-text_primary"
         style={{ backgroundColor: backgroundColor }}
       >
-        <p className="flex items-center">
-          <MapPinIcon
-            className="w-[1.28rem] h-[1.28rem] mr-2 shrink-0 text-primary"
-            style={{ color: iconColor }}
-          />
-          {address}
-        </p>
-        <p className="flex items-center mt-2 ipad:mt-4">
-          <ClockIcon
-            className="w-[1.28rem] h-[1.28rem] mr-2 shrink-0 text-primary"
-            style={{ color: iconColor }}
-          />
-          {openTime}
-        </p>
+        {address && (
+          <p className="flex items-center">
+            <MapPinIcon
+              className="w-[1.28rem] h-[1.28rem] mr-2 shrink-0 text-primary"
+              style={{ color: iconColor }}
+            />
+            {address}
+          </p>
+        )}
+        {openTime && (
+          <p className="flex items-center mt-2 ipad:mt-4">
+            <ClockIcon
+              className="w-[1.28rem] h-[1.28rem] mr-2 shrink-0 text-primary"
+              style={{ color: iconColor }}
+            />
+            {openTime}
+          </p>
+        )}
         {phone && (
           <p className="flex items-center mt-2 ipad:mt-4">
             <PhoneIcon

@@ -9,5 +9,6 @@
   "copy_link": {
     "success": "連結已複製。",
     "error": "複製失敗。"
-  }
+  },
+  "not_found_data": "很抱歉找不到資料!"
 }

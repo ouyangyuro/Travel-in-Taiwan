@@ -1,9 +1,10 @@
 import { useTranslation } from 'next-i18next';
 
+import SwiperCardsLoading from '@components/swiperCardsLoading';
 import ScenicSpotSwiperCards from '@components/scenicSpotSwiperCards';
 import ActivitySwiperCards from '@components/activitySwiperCards';
-import SwiperCardsLoading from '@components/swiperCardsLoading';
 import RestaurantSwiperCards from '@components/restaurantSwiperCards';
+import HotelSwiperCards from '@components/hotelSwiperCards';
 import Head from 'src/features/detail/components/head';
 
 import useGetNearybySpot from 'src/features/detail/hooks/useGetNearybySpot';
@@ -85,6 +86,14 @@ function NearbySpot({ queryType, position, spotID, titleColor }) {
           <div className="mt-4">
             <RestaurantSwiperCards
               lists={data.filter((d) => d.RestaurantID !== spotID)}
+            />
+          </div>
+        )}
+
+        {queryType === 'hotel' && status === 'success' && (
+          <div className="mt-4">
+            <HotelSwiperCards
+              lists={data.filter((d) => d.HotelID !== spotID)}
             />
           </div>
         )}

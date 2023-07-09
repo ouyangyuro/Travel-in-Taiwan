@@ -9,5 +9,6 @@
   "copy_link": {
     "success": "Link Copied.",
     "error": "Copy Failed."
-  }
+  },
+  "not_found_data": "Sorry, no data found!"
 }
