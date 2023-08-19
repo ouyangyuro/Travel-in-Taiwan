@@ -10,5 +10,41 @@
     "success": "連結已複製。",
     "error": "複製失敗。"
   },
+  "menu": {
+    "city": "選擇目的地",
+    "keyword": "搜尋關鍵字",
+    "theme": "選擇主題",
+    "search": "開始搜尋"
+  },
+  "theme": {
+    "scenic_spot": "熱門景點",
+    "activity": "觀光活動",
+    "restaurant": "美食品嘗",
+    "hotel": "住宿推薦"
+  },
+  "city": {
+    "taipei": "臺北市",
+    "newtaipei": "新北市",
+    "taoyuan": "桃園市",
+    "taichung": "臺中市",
+    "tainan": "臺南市",
+    "kaohsiung": "高雄市",
+    "keelung": "基隆市",
+    "hsinchu": "新竹市",
+    "hsinchucounty": "新竹縣",
+    "miaolicounty": "苗栗縣",
+    "changhuacounty": "彰化縣",
+    "nantoucounty": "南投縣",
+    "yunlincounty": "雲林縣",
+    "chiayicounty": "嘉義縣",
+    "chiayi": "嘉義市",
+    "pingtungcounty": "屏東縣",
+    "yilancounty": "宜蘭縣",
+    "hualiencounty": "花蓮縣",
+    "taitungcounty": "臺東縣",
+    "kinmencounty": "金門縣",
+    "penghucounty": "澎湖縣",
+    "lienchiangcounty": "連江縣"
+  },
   "not_found_data": "很抱歉找不到資料!"
 }

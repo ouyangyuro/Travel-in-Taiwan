@@ -86,9 +86,9 @@ export default function Header() {
           )}`}
         >
           <div className={styles.hambuageBox}>
-            <div className={styles.icon} onClick={handleToggle}>
+            <button className={styles.icon} onClick={handleToggle}>
               <AdjustmentsHorizontalIcon className="h-6 w-6 text-primary" />
-            </div>
+            </button>
             {isOpen && <Hambuage />}
           </div>
 
