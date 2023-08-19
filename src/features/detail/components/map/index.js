@@ -1,6 +1,18 @@
+import { useMap } from 'react-leaflet/hooks';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Icon } from 'leaflet';
+
+/** ---------------------------------------------------------------------------------------------
+ * Change the center position
+ * Refernce: https://react-leaflet.js.org/docs/api-map/#usemap
+ */
+function MapComponent({ position }) {
+  const map = useMap();
+  map.setView(position);
+  map.setZoom(15)
+  return null;
+}
 
 function Map({ position }) {
   /** ---------------------------------------------------------------------------------------------
@@ -24,7 +36,7 @@ function Map({ position }) {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png"
         />
-
+        <MapComponent position={position} />
         <Marker position={position} icon={customIcon}></Marker>
       </MapContainer>
     </>
