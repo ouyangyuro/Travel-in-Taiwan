@@ -1,0 +1,10 @@
+{
+    "typeMismatch": "Please enter a valid value",
+    "valueMissing": "Please enter a valid value",
+    "patternMismatch": "Please enter a valid value",
+    "badInput": "Please enter the correct format",
+    "stepMismatch": "Please enter the correct format",
+    "rangeOverflow": "Exceeded the maximum",
+    "rangeUnderflow": "Below minimum",
+    "other": "Please enter a valid value"
+}
