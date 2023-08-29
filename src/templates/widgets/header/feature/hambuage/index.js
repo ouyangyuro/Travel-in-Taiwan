@@ -9,11 +9,6 @@ import {
   ArrowDownCircleIcon,
 } from '@heroicons/react/24/solid';
 
-import Spot from '@image/spot';
-import Food from '@image/food';
-import Activity from '@image/activity';
-import Hotel from '@image/hotel';
-
 import InputField from '@components/inputField';
 
 import useOnClickOutside from '@hooks/useOnClickOutside';
@@ -21,6 +16,8 @@ import useOnClickOutside from '@hooks/useOnClickOutside';
 import { setIsOpen, setIsTransform } from '@redux/hambuage';
 
 import cx from '@utils/cx';
+import cityList from '@utils/cityList';
+import themeList from '@utils/themeList';
 
 import styles from './index.module.scss';
 
@@ -211,106 +208,6 @@ export default function Hambuage() {
  */
 const CityList = ({ city, setCity }) => {
   /** ---------------------------------------------------------------------------------------------
-   * Basic
-   */
-  const { t } = useTranslation(['common']);
-
-  /** ---------------------------------------------------------------------------------------------
-   * List: Select City List
-   */
-  const cityList = [
-    {
-      name: t('city.taipei'),
-      value: 'Taipei',
-    },
-    {
-      name: t('city.newtaipei'),
-      value: 'NewTaipei',
-    },
-    {
-      name: t('city.taoyuan'),
-      value: 'Taoyuan',
-    },
-    {
-      name: t('city.taichung'),
-      value: 'Taichung',
-    },
-    {
-      name: t('city.tainan'),
-      value: 'Tainan',
-    },
-    {
-      name: t('city.kaohsiung'),
-      value: 'Kaohsiung',
-    },
-    {
-      name: t('city.keelung'),
-      value: 'Keelung',
-    },
-    {
-      name: t('city.hsinchu'),
-      value: 'Hsinchu',
-    },
-    {
-      name: t('city.hsinchucounty'),
-      value: 'HsinchuCounty',
-    },
-    {
-      name: t('city.miaolicounty'),
-      value: 'MiaoliCounty',
-    },
-    {
-      name: t('city.changhuacounty'),
-      value: 'ChanghuaCounty',
-    },
-    {
-      name: t('city.nantoucounty'),
-      value: 'NantouCounty',
-    },
-    {
-      name: t('city.yunlincounty'),
-      value: 'YunlinCounty',
-    },
-    {
-      name: t('city.chiayicounty'),
-      value: 'ChiayiCounty',
-    },
-    {
-      name: t('city.chiayi'),
-      value: 'Chiayi',
-    },
-    {
-      name: t('city.pingtungcounty'),
-      value: 'PingtungCounty',
-    },
-    {
-      name: t('city.yilancounty'),
-      value: 'YilanCounty',
-    },
-    {
-      name: t('city.hualiencounty'),
-      value: 'HualienCounty',
-    },
-    {
-      name: t('city.taitungcounty'),
-      value: 'TaitungCounty',
-    },
-    {
-      name: t('city.kinmencounty'),
-      value: 'KinmenCounty',
-    },
-
-    {
-      name: t('city.penghucounty'),
-      value: 'PenghuCounty',
-    },
-    {
-      name: t('city.lienchiangcounty'),
-      value: 'LienchiangCounty',
-    },
-  ];
-
-  /** ---------------------------------------------------------------------------------------------
    *  onClick: select city
    */
   const handleSelectCity = (cityValue) => (e) => {
@@ -322,7 +219,7 @@ const CityList = ({ city, setCity }) => {
 
   return (
     <div className="absolute w-full z-50 bg-white p-3 grid grid-cols-3 gap-y-3 gap-x-6 shadow-3xl rounded-xl">
-      {cityList.map((item) => (
+      {cityList().map((item) => (
         <button
           onClick={handleSelectCity(item)}
           key={item.value}
@@ -346,37 +243,6 @@ const CityList = ({ city, setCity }) => {
  */
 const ThemeList = ({ theme, setTheme }) => {
   /** ---------------------------------------------------------------------------------------------
-   * Basic
-   */
-  const { t } = useTranslation(['common']);
-
-  /** ---------------------------------------------------------------------------------------------
-   * List: Select City List
-   */
-  const themeList = [
-    {
-      name: t('theme.scenic_spot'),
-      img: <Spot />,
-      value: 'ScenicSpot',
-    },
-    {
-      name: t('theme.activity'),
-      img: <Activity />,
-      value: 'Activity',
-    },
-    {
-      name: t('theme.restaurant'),
-      img: <Food />,
-      value: 'Restaurant',
-    },
-    {
-      name: t('theme.hotel'),
-      img: <Hotel />,
-      value: 'Hotel',
-    },
-  ];
-
-  /** ---------------------------------------------------------------------------------------------
    *  onClick: select theme
    */
   const handleSelectTheme = (themeValue) => (e) => {
@@ -393,7 +259,7 @@ const ThemeList = ({ theme, setTheme }) => {
 
   return (
     <div className="grid grid-cols-2 gap-y-3 gap-x-4">
-      {themeList.map((item) => (
+      {themeList().map((item) => (
         <button
           key={item.value}
           onClick={handleSelectTheme(item.value)}
