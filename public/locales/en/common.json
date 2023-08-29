@@ -10,5 +10,41 @@
     "success": "Link Copied.",
     "error": "Copy Failed."
   },
+  "menu": {
+    "city": "Select Destination",
+    "keyword": "Search Keyword",
+    "theme": "Choose A Theme",
+    "search": "Start Searching"
+  },
+  "theme": {
+    "scenic_spot": "Scenic Spot",
+    "activity": "Activity",
+    "restaurant": "Restaurant",
+    "hotel": "Hotel"
+  },
+  "city": {
+    "taipei": "Taipei",
+    "newtaipei": "NewTaipei",
+    "taoyuan": "Taoyuan",
+    "taichung": "Taichung",
+    "tainan": "Tainan",
+    "kaohsiung": "Kaohsiung",
+    "keelung": "Keelung",
+    "hsinchu": "Hsinchu",
+    "hsinchucounty": "HsinchuCounty",
+    "miaolicounty": "MiaoliCounty",
+    "changhuacounty": "ChanghuaCounty",
+    "nantoucounty": "NantouCounty",
+    "yunlincounty": "YunlinCounty",
+    "chiayicounty": "ChiayiCounty",
+    "chiayi": "Chiayi",
+    "pingtungcounty": "PingtungCounty",
+    "yilancounty": "YilanCounty",
+    "hualiencounty": "HualienCounty",
+    "taitungcounty": "TaitungCounty",
+    "kinmencounty": "KinmenCounty",
+    "penghucounty": "penghuCounty",
+    "lienchiangcounty": "LienchiangCounty"
+  },
   "not_found_data": "Sorry, no data found!"
 }

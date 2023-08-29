@@ -45,6 +45,9 @@ module.exports = {
         background_gray: 'var(--background_gray)',
         line: 'var(--line)',
       },
+      boxShadow: {
+        '3xl': '0px 14px 24px 0px rgba(0, 0, 0, 0.04)',
+      }
     },
   },
   plugins: [],
